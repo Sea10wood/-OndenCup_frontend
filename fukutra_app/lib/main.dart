@@ -99,6 +99,20 @@ class App extends StatelessWidget {
                 ),
               ),
               Positioned(
+                left: 56,
+                top: 290,
+                child: Container(
+                  width: 240,
+                  height: 56,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/signinWith.png'),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
                 left: 24,
                 top: 400,
                 child: Text(
@@ -141,25 +155,6 @@ class App extends StatelessWidget {
                     image: DecorationImage(
                       image: AssetImage('assets/mainLogo.gif'),
                       fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                left: -82,
-                top: -388,
-                child: SizedBox(
-                  width: 481,
-                  height: 168,
-                  child: Text(
-                    '福岡に住んでるけど、紹介できるほど知らない人へ',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w400,
-                      height: 0.09,
-                      letterSpacing: 0.50,
                     ),
                   ),
                 ),
