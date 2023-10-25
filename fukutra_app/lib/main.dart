@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:fukutra_app/view/place_set.dart';
 
 void main() {
-  runApp(const MyHomePage());
+  runApp(
+    MaterialApp(
+      home: MyHomePage(),
+      routes: {
+        '/PlaceSet': (context) => PlaceSet(),
+      },
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: const Color(0xFFffffff),
+      ),
+    ),
+  );
 }
 
 class MyHomePage extends StatelessWidget {
@@ -9,16 +20,11 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: const Color(0xFFffffff),
-      ),
-      home: Scaffold(
-        body: ListView(
-          children: [
-            App(),
-          ],
-        ),
+    return Scaffold(
+      body: ListView(
+        children: [
+          App(),
+        ],
       ),
     );
   }
@@ -101,13 +107,18 @@ class App extends StatelessWidget {
               Positioned(
                 left: 56,
                 top: 290,
-                child: Container(
-                  width: 240,
-                  height: 56,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/signinWith.png'),
-                      fit: BoxFit.fill,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/PlaceSet');
+                  },
+                  child: Container(
+                    width: 240,
+                    height: 56,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/signinWith.png'),
+                        fit: BoxFit.fill,
+                      ),
                     ),
                   ),
                 ),
