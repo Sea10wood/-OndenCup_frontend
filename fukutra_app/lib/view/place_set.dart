@@ -1,99 +1,123 @@
 import 'package:flutter/material.dart';
-import '../component/FukuTra_Bar.dart';
+import '../component/talkBar.dart';
 
 class PlaceSet extends StatelessWidget {
-  const PlaceSet({super.key});
+  const PlaceSet({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
+      body: ListView(
         children: [
-          Container(
-            color: Colors.white, // 背景色を白に設定
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Logo(),
           ),
-          Positioned(
-            left: 20,
-            top: 80,
-            child: CustomTextWidget(
-              text: 'FukuTra',
-              fontSize: 24.0,
-              textColor: Color(0xFF005AFF),
-            ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: IconBar(),
           ),
-          Positioned(
-            left: 28,
-            top: 156,
-            child: Icon(
-              Icons.search,
-              size: 48,
-              color: Colors.blue,
-            ),
-          ),
-          Positioned(
-            left: 80,
-            top: 168,
-            child: Transform.rotate(
-              angle: -270 * 3.14159265 / 180,
-              child: Icon(
-                Icons.change_history,
-                size: 24,
-                color: Colors.grey,
-              ),
-            ),
-          ),
-          Positioned(
-            left: 108,
-            top: 156,
-            child: Icon(
-              Icons.person,
-              size: 48,
-              color: Colors.grey,
-            ),
-          ),
-          Positioned(
-            left: 164,
-            top: 168,
-            child: Transform.rotate(
-              angle: -270 * 3.14159265 / 180,
-              child: Icon(
-                Icons.change_history,
-                size: 24,
-                color: Colors.grey,
-              ),
-            ),
-          ),
-          Positioned(
-            left: 192,
-            top: 156,
-            child: Icon(
-              Icons.drive_eta,
-              size: 48,
-              color: Colors.grey,
-            ),
-          ),
-          Positioned(
-            left: 244,
-            top: 168,
-            child: Transform.rotate(
-              angle: -270 * 3.14159265 / 180,
-              child: Icon(
-                Icons.change_history,
-                size: 24,
-                color: Colors.grey,
-              ),
-            ),
-          ),
-          Positioned(
-            left: 272,
-            top: 156,
-            child: Icon(
-              Icons.calendar_month,
-              size: 48,
-              color: Colors.grey,
-            ),
+          Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Talk(),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class Logo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      left: 20,
+      top: 80,
+      child: Text(
+        'FukuTra',
+        style: TextStyle(
+          color: Color(0xFF005AFF),
+          fontSize: 24,
+          fontFamily: 'Inter',
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+    );
+  }
+}
+
+class IconBar extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: 156,
+      left: 20,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.search,
+            size: 48,
+            color: Colors.blue,
+          ),
+          Transform.rotate(
+            angle: 90 * 3.14159265 / 180,
+            child: Icon(
+              Icons.change_history,
+              size: 24,
+              color: Colors.grey,
+            ),
+          ),
+          Icon(
+            Icons.person,
+            size: 48,
+            color: Colors.grey,
+          ),
+          Transform.rotate(
+            angle: 90 * 3.14159265 / 180,
+            child: Icon(
+              Icons.change_history,
+              size: 24,
+              color: Colors.grey,
+            ),
+          ),
+          Icon(
+            Icons.drive_eta,
+            size: 48,
+            color: Colors.grey,
+          ),
+          Transform.rotate(
+            angle: 90 * 3.14159265 / 180,
+            child: Icon(
+              Icons.change_history,
+              size: 24,
+              color: Colors.grey,
+            ),
+          ),
+          Icon(
+            Icons.calendar_today,
+            size: 48,
+            color: Colors.grey,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class Talk extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      left: 20,
+      top: 230,
+      child: Bubble(
+        text: '集合場所/最寄駅',
+        textStyle: const TextStyle(
+          color: Colors.black,
+          fontWeight: FontWeight.bold,
+          fontSize: 18,
+        ),
       ),
     );
   }
