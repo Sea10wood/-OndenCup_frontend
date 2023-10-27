@@ -21,6 +21,10 @@ class PlaceSet extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Talk(),
           ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: StationTextField(),
+          ),
         ],
       ),
     );
@@ -117,6 +121,24 @@ class Talk extends StatelessWidget {
           color: Colors.black,
           fontWeight: FontWeight.bold,
           fontSize: 18,
+        ),
+      ),
+    );
+  }
+}
+
+class StationTextField extends StatelessWidget {
+  const StationTextField({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const SizedBox(
+      width: 100,
+      child: TextField(
+        obscureText: false,
+        decoration: InputDecoration(
+          border: OutlineInputBorder(),
+          labelText: '集合駅',
         ),
       ),
     );
