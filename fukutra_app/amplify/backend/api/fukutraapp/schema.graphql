@@ -1,0 +1,13 @@
+type User @model @auth(rules: [{ allow: owner }]){
+  id: ID!
+  name: String
+  kana: String
+  gender: String
+  profileImageUrl: String
+  phoneNumber: String
+  email: String!}
+
+type Plan @model {
+    id : ID!
+    
+}
