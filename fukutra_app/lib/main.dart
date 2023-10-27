@@ -1,197 +1,66 @@
 import 'package:flutter/material.dart';
+// import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fukutra_app/models/ModelProvider.dart';
+import 'package:fukutra_app/view/title_screen.dart';
+import 'package:go_router/go_router.dart';
+import 'package:amplify_api/amplify_api.dart';
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+import 'package:amplify_authenticator/amplify_authenticator.dart';
+import 'package:amplify_flutter/amplify_flutter.dart';
+import 'amplifyconfiguration.dart';
 import 'package:fukutra_app/view/place_set.dart';
 
-void main() {
-  runApp(
-    MaterialApp(
-      home: MyHomePage(),
-      routes: {
-        '/PlaceSet': (context) => PlaceSet(),
-      },
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: const Color(0xFFffffff),
-      ),
-    ),
-  );
+void main() async {
+  // await dotenv.load(fileName: ".env"); //envファイルの読み込み
+  WidgetsFlutterBinding.ensureInitialized(); //Flutter Engineと通信?
+  await _configureAmplify();
+  runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key}) : super(key: key); // Fix super.key and add Key?
+Future<void> _configureAmplify() async {
+  try {
+    // Create the API plugin.
+    //
+    // If `ModelProvider.instance` is not available, try running
+    // `amplify codegen models` from the root of your project.
+    final api = AmplifyAPI(modelProvider: ModelProvider.instance);
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView(
-        children: [
-          App(),
-        ],
-      ),
-    );
+    // Create the Auth plugin.
+    final auth = AmplifyAuthCognito();
+
+    // Add the plugins and configure Amplify for your app.
+    await Amplify.addPlugins([api, auth]);
+    await Amplify.configure(amplifyconfig);
+
+    safePrint('Successfully configured');
+  } on Exception catch (e) {
+    safePrint('Error configuring Amplify: $e');
   }
 }
 
-class App extends StatelessWidget {
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+  static final _router = GoRouter(
+    routes: [
+      GoRoute(
+        path: '/',
+        builder: (context, state) => const TitleScreen(),
+      ),
+      GoRoute(path: '/PlaceSet', builder: (context, state) => const PlaceSet())
+    ],
+  );
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: 360,
-          height: 800,
-          clipBehavior: Clip.antiAlias,
-          decoration: BoxDecoration(color: Colors.white),
-          child: Stack(
-            children: [
-              Positioned(
-                left: 20,
-                top: 138,
-                child: SizedBox(
-                  width: 164,
-                  height: 40,
-                  child: Text(
-                    'FukuTra',
-                    style: TextStyle(
-                      color: const Color(0xFF005AFF),
-                      fontSize: 32,
-                      fontFamily: 'Inter',
-                      fontWeight: FontWeight.w700,
-                      height: 1.0,
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 20,
-                top: 208,
-                child: SizedBox(
-                  width: 154,
-                  height: 20,
-                  child: Text.rich(
-                    TextSpan(
-                      children: [
-                        TextSpan(
-                          text: '旅をもっと',
-                          style: TextStyle(
-                            color: const Color(0xFF686868),
-                            fontSize: 15,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w700,
-                            height: 1.0,
-                          ),
-                        ),
-                        TextSpan(
-                          text: '想像的',
-                          style: TextStyle(
-                            color: const Color(0xFF0019FF),
-                            fontSize: 15,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w700,
-                            height: 1.0,
-                          ),
-                        ),
-                        TextSpan(
-                          text: 'に',
-                          style: TextStyle(
-                            color: const Color(0xFF686868),
-                            fontSize: 15,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w700,
-                            height: 1.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 56,
-                top: 290,
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/PlaceSet');
-                  },
-                  child: Container(
-                    width: 240,
-                    height: 56,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/signinWith.png'),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 24,
-                top: 400,
-                child: Text(
-                  '福岡に住んでるけど、紹介できるほど知らない人へ',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 12,
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w400,
-                    height: 0.17,
-                    letterSpacing: 0.50,
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 156,
-                top: 538,
-                child: SizedBox(
-                  width: 180,
-                  height: 21,
-                  child: Text(
-                    'created by そーらーしーうるふ',
-                    style: TextStyle(
-                      color: const Color(0xFF757575),
-                      fontSize: 12,
-                      fontFamily: 'Inter',
-                      fontWeight: FontWeight.w700,
-                      height: 1.0,
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 176,
-                top: 418,
-                child: Container(
-                  width: 120,
-                  height: 90,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/mainLogo.gif'),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 20,
-                top: 178,
-                child: SizedBox(
-                  width: 313,
-                  height: 18,
-                  child: Text(
-                    'FukuokaTravel',
-                    style: TextStyle(
-                      color: const Color(0xFF757575),
-                      fontSize: 16,
-                      fontFamily: 'Inter',
-                      fontWeight: FontWeight.w700,
-                      height: 1.0,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
+    return Authenticator(
+      child: MaterialApp.router(
+        routerConfig: _router,
+        debugShowCheckedModeBanner: false, //debugバナーを消す
+        builder: Authenticator.builder(),
+        theme: ThemeData.dark().copyWith(
+          scaffoldBackgroundColor: const Color(0xFFffffff),
         ),
-      ],
+      ),
     );
   }
 }
