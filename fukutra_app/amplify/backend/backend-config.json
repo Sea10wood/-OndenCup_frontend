@@ -7,17 +7,24 @@
             "UserPoolId"
           ],
           "category": "auth",
-          "resourceName": "fukutraapp4a9c4c2f"
+          "resourceName": "fukutraapp987a9360"
         }
       ],
       "output": {
         "authConfig": {
-          "additionalAuthenticationProviders": [],
-          "defaultAuthentication": {
-            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-            "userPoolConfig": {
-              "userPoolId": "authfukutraapp4a9c4c2f"
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+              "userPoolConfig": {
+                "userPoolId": "authfukutraapp987a9360"
+              }
             }
+          ],
+          "defaultAuthentication": {
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7
+            },
+            "authenticationType": "API_KEY"
           }
         }
       },
@@ -26,7 +33,7 @@
     }
   },
   "auth": {
-    "fukutraapp4a9c4c2f": {
+    "fukutraapp987a9360": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {

@@ -4,8 +4,14 @@
     "apiName": "fukutraapp",
     "serviceName": "AppSync",
     "defaultAuthType": {
-      "mode": "AMAZON_COGNITO_USER_POOLS",
-      "cognitoUserPoolId": "authfukutraapp4a9c4c2f"
-    }
+      "mode": "API_KEY",
+      "expirationTime": 7
+    },
+    "additionalAuthTypes": [
+      {
+        "mode": "AMAZON_COGNITO_USER_POOLS",
+        "cognitoUserPoolId": "authfukutraapp987a9360"
+      }
+    ]
   }
 }

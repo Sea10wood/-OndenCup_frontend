@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class TitleScreen extends StatelessWidget {
   const TitleScreen({Key? key}) : super(key: key);
@@ -85,7 +86,9 @@ class TitleScreen extends StatelessWidget {
               child: Row(
                 children: [
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.go('/login');
+                    },
                     style: TextButton.styleFrom(
                       backgroundColor: Colors.grey,
                       padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -96,7 +99,9 @@ class TitleScreen extends StatelessWidget {
                   ),
                   const SizedBox(width: 10),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.go('/signup');
+                    },
                     style: TextButton.styleFrom(
                       backgroundColor: Colors.grey,
                       padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),

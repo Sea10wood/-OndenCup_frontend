@@ -1,10 +1,10 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "fukutraapp4a9c4c2f_identitypool_4a9c4c2f",
+    "identityPoolName": "fukutraapp987a9360_identitypool_987a9360",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "fukutr4a9c4c2f",
-    "userPoolName": "fukutraapp4a9c4c2f_userpool_4a9c4c2f",
+    "resourceNameTruncated": "fukutr987a9360",
+    "userPoolName": "fukutraapp987a9360_userpool_987a9360",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -31,10 +31,10 @@
     "userpoolClientReadAttributes": [
       "email"
     ],
-    "userpoolClientLambdaRole": "fukutr4a9c4c2f_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "fukutr987a9360_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "4a9c4c2f",
-    "resourceName": "fukutraapp4a9c4c2f",
+    "sharedId": "987a9360",
+    "resourceName": "fukutraapp987a9360",
     "authSelections": "identityPoolAndUserPool",
     "useDefault": "default",
     "userPoolGroupList": [],

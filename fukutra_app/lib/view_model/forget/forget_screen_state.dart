@@ -6,6 +6,6 @@ part 'forget_screen_state.freezed.dart';
 @freezed
 class ForgetScreenState with _$ForgetScreenState {
   const factory ForgetScreenState({
-    required TextEditingController emailController,
+    required TextEditingController nameController,
   }) = _ForgetScreenState;
 }

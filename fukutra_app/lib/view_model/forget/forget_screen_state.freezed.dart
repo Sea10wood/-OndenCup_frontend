@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ForgetScreenState {
-  TextEditingController get emailController =>
+  TextEditingController get nameController =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +30,7 @@ abstract class $ForgetScreenStateCopyWith<$Res> {
           ForgetScreenState value, $Res Function(ForgetScreenState) then) =
       _$ForgetScreenStateCopyWithImpl<$Res, ForgetScreenState>;
   @useResult
-  $Res call({TextEditingController emailController});
+  $Res call({TextEditingController nameController});
 }
 
 /// @nodoc
@@ -46,12 +46,12 @@ class _$ForgetScreenStateCopyWithImpl<$Res, $Val extends ForgetScreenState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? emailController = null,
+    Object? nameController = null,
   }) {
     return _then(_value.copyWith(
-      emailController: null == emailController
-          ? _value.emailController
-          : emailController // ignore: cast_nullable_to_non_nullable
+      nameController: null == nameController
+          ? _value.nameController
+          : nameController // ignore: cast_nullable_to_non_nullable
               as TextEditingController,
     ) as $Val);
   }
@@ -65,7 +65,7 @@ abstract class _$$ForgetScreenStateImplCopyWith<$Res>
       __$$ForgetScreenStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({TextEditingController emailController});
+  $Res call({TextEditingController nameController});
 }
 
 /// @nodoc
@@ -79,12 +79,12 @@ class __$$ForgetScreenStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? emailController = null,
+    Object? nameController = null,
   }) {
     return _then(_$ForgetScreenStateImpl(
-      emailController: null == emailController
-          ? _value.emailController
-          : emailController // ignore: cast_nullable_to_non_nullable
+      nameController: null == nameController
+          ? _value.nameController
+          : nameController // ignore: cast_nullable_to_non_nullable
               as TextEditingController,
     ));
   }
@@ -93,14 +93,14 @@ class __$$ForgetScreenStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ForgetScreenStateImpl implements _ForgetScreenState {
-  const _$ForgetScreenStateImpl({required this.emailController});
+  const _$ForgetScreenStateImpl({required this.nameController});
 
   @override
-  final TextEditingController emailController;
+  final TextEditingController nameController;
 
   @override
   String toString() {
-    return 'ForgetScreenState(emailController: $emailController)';
+    return 'ForgetScreenState(nameController: $nameController)';
   }
 
   @override
@@ -108,12 +108,12 @@ class _$ForgetScreenStateImpl implements _ForgetScreenState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ForgetScreenStateImpl &&
-            (identical(other.emailController, emailController) ||
-                other.emailController == emailController));
+            (identical(other.nameController, nameController) ||
+                other.nameController == nameController));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, emailController);
+  int get hashCode => Object.hash(runtimeType, nameController);
 
   @JsonKey(ignore: true)
   @override
@@ -125,11 +125,11 @@ class _$ForgetScreenStateImpl implements _ForgetScreenState {
 
 abstract class _ForgetScreenState implements ForgetScreenState {
   const factory _ForgetScreenState(
-          {required final TextEditingController emailController}) =
+          {required final TextEditingController nameController}) =
       _$ForgetScreenStateImpl;
 
   @override
-  TextEditingController get emailController;
+  TextEditingController get nameController;
   @override
   @JsonKey(ignore: true)
   _$$ForgetScreenStateImplCopyWith<_$ForgetScreenStateImpl> get copyWith =>

@@ -7,7 +7,7 @@ part 'login_screen_state.freezed.dart';
 class LoginScreenState with _$LoginScreenState {
   const factory LoginScreenState({
     required bool visiable,
-    required TextEditingController emailController,
+    required TextEditingController nameController,
     required TextEditingController passwordController,
   }) = _LoginScreenState;
 }
