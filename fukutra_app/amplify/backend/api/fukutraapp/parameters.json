@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "fukutraapp",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authfukutraapp4a9c4c2f",
+      "Outputs.UserPoolId"
+    ]
+  }
+}
