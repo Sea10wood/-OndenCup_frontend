@@ -21,9 +21,14 @@ class PlaceSet extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Talk(),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: StationTextField(),
+          Row(
+            children: <Widget>[
+              TextField(decoration: InputDecoration(labelText: '未入力')),
+              Spacer(flex: 1),
+              TextField(decoration: InputDecoration(labelText: '未入力')),
+              Spacer(flex: 2),
+              MyElevatedButton(),
+            ],
           ),
         ],
       ),
@@ -34,17 +39,13 @@ class PlaceSet extends StatelessWidget {
 class Logo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      left: 20,
-      top: 80,
-      child: Text(
-        'FukuTra',
-        style: TextStyle(
-          color: Color(0xFF005AFF),
-          fontSize: 24,
-          fontFamily: 'Inter',
-          fontWeight: FontWeight.w700,
-        ),
+    return Text(
+      'FukuTra',
+      style: TextStyle(
+        color: Color(0xFF005AFF),
+        fontSize: 24,
+        fontFamily: 'Inter',
+        fontWeight: FontWeight.w700,
       ),
     );
   }
@@ -53,58 +54,54 @@ class Logo extends StatelessWidget {
 class IconBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      top: 156,
-      left: 20,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.search,
-            size: 48,
-            color: Colors.blue,
-          ),
-          Transform.rotate(
-            angle: 90 * 3.14159265 / 180,
-            child: Icon(
-              Icons.change_history,
-              size: 24,
-              color: Colors.grey,
-            ),
-          ),
-          Icon(
-            Icons.person,
-            size: 48,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          Icons.search,
+          size: 48,
+          color: Colors.blue,
+        ),
+        Transform.rotate(
+          angle: 90 * 3.14159265 / 180,
+          child: Icon(
+            Icons.change_history,
+            size: 24,
             color: Colors.grey,
           ),
-          Transform.rotate(
-            angle: 90 * 3.14159265 / 180,
-            child: Icon(
-              Icons.change_history,
-              size: 24,
-              color: Colors.grey,
-            ),
-          ),
-          Icon(
-            Icons.drive_eta,
-            size: 48,
+        ),
+        Icon(
+          Icons.person,
+          size: 48,
+          color: Colors.grey,
+        ),
+        Transform.rotate(
+          angle: 90 * 3.14159265 / 180,
+          child: Icon(
+            Icons.change_history,
+            size: 24,
             color: Colors.grey,
           ),
-          Transform.rotate(
-            angle: 90 * 3.14159265 / 180,
-            child: Icon(
-              Icons.change_history,
-              size: 24,
-              color: Colors.grey,
-            ),
-          ),
-          Icon(
-            Icons.calendar_today,
-            size: 48,
+        ),
+        Icon(
+          Icons.drive_eta,
+          size: 48,
+          color: Colors.grey,
+        ),
+        Transform.rotate(
+          angle: 90 * 3.14159265 / 180,
+          child: Icon(
+            Icons.change_history,
+            size: 24,
             color: Colors.grey,
           ),
-        ],
-      ),
+        ),
+        Icon(
+          Icons.calendar_today,
+          size: 48,
+          color: Colors.grey,
+        ),
+      ],
     );
   }
 }
@@ -112,35 +109,30 @@ class IconBar extends StatelessWidget {
 class Talk extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      left: 20,
-      top: 230,
-      child: Bubble(
-        text: '集合場所/最寄駅',
-        textStyle: const TextStyle(
-          color: Colors.black,
-          fontWeight: FontWeight.bold,
-          fontSize: 18,
-        ),
+    return Bubble(
+      text: '集合場所/最寄駅',
+      textStyle: const TextStyle(
+        color: Colors.black,
+        fontWeight: FontWeight.bold,
+        fontSize: 18,
       ),
     );
   }
 }
 
-class StationTextField extends StatelessWidget {
-  const StationTextField({Key? key}) : super(key: key);
-
+class MyElevatedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
-      width: 100,
-      child: TextField(
-        obscureText: false,
-        decoration: InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: '集合駅',
+    return ElevatedButton(
+      child: const Text('Button'),
+      style: ElevatedButton.styleFrom(
+        primary: Colors.blue,
+        onPrimary: Colors.black,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
         ),
       ),
+      onPressed: () {},
     );
   }
 }
