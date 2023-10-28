@@ -7,6 +7,8 @@ class PeopleSet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isWideScreen = screenWidth >= 600;
     return Scaffold(
       body: ListView(
         children: [
@@ -19,7 +21,12 @@ class PeopleSet extends StatelessWidget {
             child: IconBar(),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.only(
+              left: isWideScreen ? 120 : 16,
+              right: isWideScreen ? 120 : 16,
+              top: 40,
+              bottom: 0,
+            ),
             child: Talk(),
           ),
           Padding(
@@ -38,16 +45,24 @@ class PeopleSet extends StatelessWidget {
               ),
             ),
           ),
-          // Padding(
-          //   padding:
-          //       const EdgeInsets.only(left: 100, right: 0, top: 40, bottom: 0),
-          //   child: Container(
-          //     child: CheckboxPeopleSet(),
-          //   ),
-          // ),
           Padding(
-            padding:
-                const EdgeInsets.only(left: 16, right: 0, top: 40, bottom: 10),
+            padding: EdgeInsets.only(
+              left: isWideScreen ? 120 : 16,
+              right: isWideScreen ? 120 : 16,
+              top: 40,
+              bottom: 0,
+            ),
+            child: Container(
+              child: CheckboxPeopleSet(),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+              left: 16,
+              right: 16,
+              top: 40,
+              bottom: 0,
+            ),
             child: RichText(
               text: const TextSpan(
                 text: 'どんな雰囲気で旅行？',
@@ -61,15 +76,15 @@ class PeopleSet extends StatelessWidget {
               ),
             ),
           ),
-          // Padding(
-          //   padding:
-          //       const EdgeInsets.only(left: 0, right: 0, top: 40, bottom: 0),
-          //   child: Container(
-          //     child: CheckboxSituationSet(),
-          //   ),
-          // ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(120, 40, 120, 0),
+            padding:
+                const EdgeInsets.only(left: 0, right: 0, top: 40, bottom: 0),
+            child: Container(
+              child: CheckboxSituationSet(),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(120, 40, 120, 40),
             child: Container(
               color: Colors.blue[200],
               height: 40,
@@ -169,23 +184,19 @@ class _CheckboxListTilesState extends State<CheckboxPeopleSet> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          children: _checkedMaps
-              .map((e) => CheckboxListTile(
-                    title: Text(e['value']),
-                    subtitle: Text(e['checked'] ? "ON" : "OFF"),
-                    value: e['checked'],
-                    onChanged: (bool? checkedValue) {
-                      setState(() {
-                        e['checked'] = checkedValue;
-                      });
-                    },
-                  ))
-              .toList(),
-        ),
-      ),
+    return Column(
+      children: _checkedMaps
+          .map((e) => CheckboxListTile(
+                title: Text(e['value']),
+                subtitle: Text(e['checked'] ? "ON" : "OFF"),
+                value: e['checked'],
+                onChanged: (bool? checkedValue) {
+                  setState(() {
+                    e['checked'] = checkedValue;
+                  });
+                },
+              ))
+          .toList(),
     );
   }
 }
@@ -194,41 +205,34 @@ class CheckboxSituationSet extends StatefulWidget {
   const CheckboxSituationSet({Key? key}) : super(key: key);
 
   @override
-  _CheckboxSituationSet createState() => _CheckboxSituationSet();
+  State<CheckboxSituationSet> createState() => _CheckboxListSituationState();
 }
 
-class _CheckboxSituationSet extends State<CheckboxSituationSet> {
-  final List<String> _valueList = [
-    'はしゃぐ！',
-    'のんびり',
-    'グルメ！',
-    '文化的に',
-    '観光地メイン',
-    'ふらふら',
+class _CheckboxListSituationState extends State<CheckboxSituationSet> {
+  final List<Map<String, dynamic>> _checkedMaps = [
+    {'value': 'はしゃぐ！', 'checked': false},
+    {'value': 'のんびり', 'checked': false},
+    {'value': 'グルメ！', 'checked': false},
+    {'value': '文化的に', 'checked': false},
+    {'value': '観光メイン', 'checked': false},
+    {'value': 'ふらふら', 'checked': false},
   ];
-  final List<bool> _checkedList = List.generate(4, (index) => false);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: ListView.separated(
-          itemBuilder: (context, index) => CheckboxListTile(
-            title: Text(_valueList[index]),
-            subtitle: Text(_checkedList[index] ? "Set" : "OFF"),
-            value: _checkedList[index],
-            onChanged: (bool? checkedValue) {
-              setState(() {
-                _checkedList[index] = checkedValue!;
-              });
-            },
-          ),
-          separatorBuilder: (context, index) {
-            return const Divider(height: 0.5);
-          },
-          itemCount: _valueList.length,
-        ),
-      ),
+    return Column(
+      children: _checkedMaps
+          .map((e) => CheckboxListTile(
+                title: Text(e['value']),
+                subtitle: Text(e['checked'] ? "ON" : "OFF"),
+                value: e['checked'],
+                onChanged: (bool? checkedValue) {
+                  setState(() {
+                    e['checked'] = checkedValue;
+                  });
+                },
+              ))
+          .toList(),
     );
   }
 }
