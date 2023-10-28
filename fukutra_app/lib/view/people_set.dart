@@ -22,40 +22,60 @@ class PeopleSet extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Talk(),
           ),
-          RichText(
-            text: const TextSpan(
-              text: '何人で旅行ですか？',
-              style: TextStyle(
-                color: Color(0xFF212121),
-                fontSize: 15,
-                fontFamily: 'Inter',
-                fontWeight: FontWeight.w700,
-                height: 1.0,
+          Padding(
+            padding:
+                const EdgeInsets.only(left: 16, right: 0, top: 40, bottom: 10),
+            child: RichText(
+              text: const TextSpan(
+                text: '何人で旅行ですか？',
+                style: TextStyle(
+                  color: Color(0xFF212121),
+                  fontSize: 15,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w700,
+                  height: 1.0,
+                ),
               ),
             ),
           ),
-          CheckboxPeopleSet(),
-          RichText(
-            text: const TextSpan(
-              text: 'どんな雰囲気で旅行？',
-              style: TextStyle(
-                color: Color(0xFF212121),
-                fontSize: 15,
-                fontFamily: 'Inter',
-                fontWeight: FontWeight.w700,
-                height: 1.0,
+          // Padding(
+          //   padding:
+          //       const EdgeInsets.only(left: 100, right: 0, top: 40, bottom: 0),
+          //   child: Container(
+          //     child: CheckboxPeopleSet(),
+          //   ),
+          // ),
+          Padding(
+            padding:
+                const EdgeInsets.only(left: 16, right: 0, top: 40, bottom: 10),
+            child: RichText(
+              text: const TextSpan(
+                text: 'どんな雰囲気で旅行？',
+                style: TextStyle(
+                  color: Color(0xFF212121),
+                  fontSize: 15,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w700,
+                  height: 1.0,
+                ),
               ),
             ),
           ),
-          CheckboxSituationSet(),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              primary: Colors.blue,
-              onPrimary: Colors.yellow,
+          // Padding(
+          //   padding:
+          //       const EdgeInsets.only(left: 0, right: 0, top: 40, bottom: 0),
+          //   child: Container(
+          //     child: CheckboxSituationSet(),
+          //   ),
+          // ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(120, 40, 120, 0),
+            child: Container(
+              color: Colors.blue[200],
+              height: 40,
+              child: ElevatedButton(onPressed: () {}, child: const Text('次へ')),
             ),
-            onPressed: null,
-            child: Text('次へ'),
-          ),
+          )
         ],
       ),
     );
@@ -65,58 +85,54 @@ class PeopleSet extends StatelessWidget {
 class IconBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      top: 156,
-      left: 20,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.search,
-            size: 48,
-            color: Colors.yellow,
-          ),
-          Transform.rotate(
-            angle: 90 * 3.14159265 / 180,
-            child: Icon(
-              Icons.change_history,
-              size: 24,
-              color: Colors.blue,
-            ),
-          ),
-          Icon(
-            Icons.person,
-            size: 48,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          Icons.search,
+          size: 48,
+          color: Colors.yellow,
+        ),
+        Transform.rotate(
+          angle: 90 * 3.14159265 / 180,
+          child: Icon(
+            Icons.change_history,
+            size: 24,
             color: Colors.grey,
           ),
-          Transform.rotate(
-            angle: 90 * 3.14159265 / 180,
-            child: Icon(
-              Icons.change_history,
-              size: 24,
-              color: Colors.grey,
-            ),
-          ),
-          Icon(
-            Icons.drive_eta,
-            size: 48,
+        ),
+        Icon(
+          Icons.person,
+          size: 48,
+          color: Colors.blue,
+        ),
+        Transform.rotate(
+          angle: 90 * 3.14159265 / 180,
+          child: Icon(
+            Icons.change_history,
+            size: 24,
             color: Colors.grey,
           ),
-          Transform.rotate(
-            angle: 90 * 3.14159265 / 180,
-            child: Icon(
-              Icons.change_history,
-              size: 24,
-              color: Colors.grey,
-            ),
-          ),
-          Icon(
-            Icons.calendar_today,
-            size: 48,
+        ),
+        Icon(
+          Icons.drive_eta,
+          size: 48,
+          color: Colors.grey,
+        ),
+        Transform.rotate(
+          angle: 90 * 3.14159265 / 180,
+          child: Icon(
+            Icons.change_history,
+            size: 24,
             color: Colors.grey,
           ),
-        ],
-      ),
+        ),
+        Icon(
+          Icons.calendar_today,
+          size: 48,
+          color: Colors.grey,
+        ),
+      ],
     );
   }
 }
@@ -124,16 +140,12 @@ class IconBar extends StatelessWidget {
 class Talk extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      left: 20,
-      top: 230,
-      child: Bubble(
-        text: '人数/雰囲気',
-        textStyle: const TextStyle(
-          color: Colors.black,
-          fontWeight: FontWeight.bold,
-          fontSize: 18,
-        ),
+    return Bubble(
+      text: '人数/雰囲気',
+      textStyle: const TextStyle(
+        color: Colors.black,
+        fontWeight: FontWeight.bold,
+        fontSize: 18,
       ),
     );
   }
@@ -147,28 +159,31 @@ class CheckboxPeopleSet extends StatefulWidget {
 }
 
 class _CheckboxListTilesState extends State<CheckboxPeopleSet> {
-  final List<String> _valueList = ['1人', '２人', '３人', '4-8人', 'それ以上'];
-  final List<bool> _checkedList = List.generate(4, (index) => false);
+  final List<Map<String, dynamic>> _checkedMaps = [
+    {'value': '1人', 'checked': false},
+    {'value': '２人', 'checked': false},
+    {'value': '３人', 'checked': false},
+    {'value': '4-8人', 'checked': false},
+    {'value': 'それ以上', 'checked': false},
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: ListView.separated(
-          itemBuilder: (context, index) => CheckboxListTile(
-            title: Text(_valueList[index]),
-            subtitle: Text(_checkedList[index] ? "Set" : "OFF"),
-            value: _checkedList[index],
-            onChanged: (bool? checkedValue) {
-              setState(() {
-                _checkedList[index] = checkedValue!;
-              });
-            },
-          ),
-          separatorBuilder: (context, index) {
-            return const Divider(height: 0.5);
-          },
-          itemCount: _valueList.length,
+        child: Column(
+          children: _checkedMaps
+              .map((e) => CheckboxListTile(
+                    title: Text(e['value']),
+                    subtitle: Text(e['checked'] ? "ON" : "OFF"),
+                    value: e['checked'],
+                    onChanged: (bool? checkedValue) {
+                      setState(() {
+                        e['checked'] = checkedValue;
+                      });
+                    },
+                  ))
+              .toList(),
         ),
       ),
     );
