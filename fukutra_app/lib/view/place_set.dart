@@ -21,6 +21,38 @@ class PlaceSet extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Talk(),
           ),
+          Padding(
+            padding:
+                const EdgeInsets.only(left: 20, right: 20, top: 80, bottom: 10),
+            child: TextFormField(
+              keyboardType: TextInputType.emailAddress,
+              autofocus: false,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: '集合する駅を入力',
+              ),
+            ),
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 10),
+            child: TextFormField(
+              keyboardType: TextInputType.emailAddress,
+              autofocus: false,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: '集合する駅を入力',
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(120, 40, 120, 0),
+            child: Container(
+              color: Colors.blue[200],
+              height: 40,
+              child: ElevatedButton(onPressed: () {}, child: const Text('次へ')),
+            ),
+          )
         ],
       ),
     );
