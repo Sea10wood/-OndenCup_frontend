@@ -102,11 +102,13 @@ class MyApp extends StatelessWidget {
   );
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp.router(
       routerConfig: router,
       debugShowCheckedModeBanner: false, //debugバナーを消す
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: const Color(0xFFffffff),
+
       ),
       //デフォルトの画面の色で見えないものができてしまうため一時的にコメント化
     );
