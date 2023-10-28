@@ -1,50 +1,65 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import 'package:fukutra_app/component/bar.dart';
-// import 'package:fukutra_app/view_model/signup/signup_screen_state.dart';
+import 'package:amplify_flutter/amplify_flutter.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fukutra_app/view_model/signup/signup_screen_state.dart';
 
-// //ここまでがモデル、ここから下がviewモデル
-// final signupScreenProvider =
-//     StateNotifierProvider<SignupScreenNotifier, SignupScreenState>(
-//   (ref) => SignupScreenNotifier(ref)..initState(),
-// ); //stateの定義
+//ここまでがモデル、ここから下がviewモデル
+final signupScreenProvider =
+    StateNotifierProvider<SignupScreenNotifier, SignupScreenState>(
+  (ref) => SignupScreenNotifier(ref)..initState(),
+); //stateの定義
 
-// class SignupScreenNotifier extends StateNotifier<SignupScreenState> {
-//   final Ref ref;
-//   SignupScreenNotifier(this.ref)
-//       : super(SignupScreenState(
-//             visiable: true,
-//             emailController: TextEditingController(),
-//             passwordController: TextEditingController())) {
-//     initState();
-//   }
+class SignupScreenNotifier extends StateNotifier<SignupScreenState> {
+  final Ref ref;
+  SignupScreenNotifier(this.ref)
+      : super(SignupScreenState(
+            visiable: true,
+            usernameController: TextEditingController(),
+            emailController: TextEditingController(),
+            passwordController: TextEditingController())) {
+    initState();
+  }
 
-//   Future<void> initState() async {
-//     state = state.copyWith(
-//         emailController: TextEditingController(text: ""),
-//         passwordController: TextEditingController(text: ""),
-//         visiable: true);
-//   }
+  Future<void> initState() async {
+    state = state.copyWith(
+        emailController: TextEditingController(text: ""),
+        passwordController: TextEditingController(text: ""),
+        usernameController: TextEditingController(text: ""),
+        visiable: true);
+  }
 
-//   void changeVisiable() {
-//     state = state.copyWith(visiable: !state.visiable);
-//   } //パスワードの可視化、非可視化の変更処理
+  void changeVisiable() {
+    state = state.copyWith(visiable: !state.visiable);
+  }
 
-//   Future<void> signup(BuildContext context) async {
-//     try {
-//       snackbar("メールを送信しました", context);
-//       final user = await ref
-//           .read(authProvider)
-//           .signup(state.emailController.text, state.passwordController.text);
-//       ref.read(authProvider).createaccount(user);
+  Future<void> signUpUser() async {
+    try {
+      final userAttributes = {
+        AuthUserAttributeKey.email: state.emailController.text,
+      };
+      final result = await Amplify.Auth.signUp(
+        username: state.usernameController.text,
+        password: state.passwordController.text,
+        options: SignUpOptions(
+          userAttributes: userAttributes,
+        ),
+      );
+      await handleSignUpResult(result);
+    } on AuthException catch (e) {
+      safePrint('Error signing up user: ${e.message}');
+    }
+  }
 
-//       //一度signoutして画面遷移(ログイン)orログイン状態のままhome(登録画面)に遷移
+  Future<void> handleSignUpResult(SignUpResult result) async {
+    final codeDeliveryDetails = result.nextStep.codeDeliveryDetails!;
+    handleCodeDelivery(codeDeliveryDetails);
+  }
 
-//       // ignore: use_build_context_synchronously
-//     } catch (e) {
-//       //signupに関するエラー処理
-//     }
-//     //ここにサインアップ処理を書く
-//   }
-// }
-// //stateの処理
+  void handleCodeDelivery(AuthCodeDeliveryDetails codeDeliveryDetails) {
+    safePrint(
+      'A confirmation code has been sent to ${codeDeliveryDetails.destination}. '
+      'Please check your ${codeDeliveryDetails.deliveryMedium.name} for the code.',
+    );
+  }
+}
+//stateの処理

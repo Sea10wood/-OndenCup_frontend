@@ -1,26 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fukutra_app/view_model/forget/forget_screen_notifier.dart';
+import 'package:fukutra_app/view_model/confirmuser/confirmuser_notifier.dart';
 import 'package:go_router/go_router.dart';
 
-class ForgetScreen extends ConsumerWidget {
-  const ForgetScreen({Key? key}) : super(key: key);
+class ConfirmUserScreen extends ConsumerStatefulWidget {
+  final String name;
+  const ConfirmUserScreen({Key? key, required this.name}) : super(key: key);
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(forgetScreenProvider); //値の読み込みのみ
-    final notifier = ref.read(forgetScreenProvider.notifier); //値の書き込み
-    final nameController = state.nameController;
+  ConfirmUserScreenState createState() => ConfirmUserScreenState();
+}
 
+class ConfirmUserScreenState extends ConsumerState<ConfirmUserScreen> {
+  @override
+  Widget build(
+    BuildContext context,
+  ) {
+    final state = ref.watch(confirmUserScreenProvider); //値の読み込みのみ
+    final confiemuserNotifier =
+        ref.read(confirmUserScreenProvider.notifier); //値の書き込み
+    final codeController = state.codeController;
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back_ios),
             onPressed: () {
-              context.go('/login');
+              context.go('login');
             },
           ),
-          title: const Text("Forget Screen"),
+          title: const Text("ConfiemUser Screen"),
         ),
         body: Center(
           child: SingleChildScrollView(
@@ -29,7 +37,7 @@ class ForgetScreen extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    "Forget",
+                    "ConfiemUser",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -42,17 +50,22 @@ class ForgetScreen extends ConsumerWidget {
                     child: TextFormField(
                       keyboardType: TextInputType.emailAddress,
                       autofocus: false, //テキスト入力時に処理
-                      controller: nameController,
+                      controller: codeController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'name',
+                        labelText: 'Confirmation Code',
                       ),
                     ),
                   ),
+
                   ElevatedButton(
                     onPressed: () {
-                      notifier.resetPassword(state.nameController.text);
-                      context.go('${state.nameController.text}/resetpassword');
+                      confiemuserNotifier.confirmUser(
+                        widget.name,
+                        state.codeController.text,
+                        context,
+                      );
+                      //snackbar(message as String, context);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
@@ -61,7 +74,7 @@ class ForgetScreen extends ConsumerWidget {
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    child: const Text('Send Email'),
+                    child: const Text('ConfiemUser'),
                   ),
                   //assets/googlelogo.png
                 ]),

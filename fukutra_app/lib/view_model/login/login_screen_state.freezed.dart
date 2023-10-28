@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$LoginScreenState {
   bool get visiable => throw _privateConstructorUsedError;
-  TextEditingController get emailController =>
+  TextEditingController get nameController =>
       throw _privateConstructorUsedError;
   TextEditingController get passwordController =>
       throw _privateConstructorUsedError;
@@ -35,7 +35,7 @@ abstract class $LoginScreenStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool visiable,
-      TextEditingController emailController,
+      TextEditingController nameController,
       TextEditingController passwordController});
 }
 
@@ -53,7 +53,7 @@ class _$LoginScreenStateCopyWithImpl<$Res, $Val extends LoginScreenState>
   @override
   $Res call({
     Object? visiable = null,
-    Object? emailController = null,
+    Object? nameController = null,
     Object? passwordController = null,
   }) {
     return _then(_value.copyWith(
@@ -61,9 +61,9 @@ class _$LoginScreenStateCopyWithImpl<$Res, $Val extends LoginScreenState>
           ? _value.visiable
           : visiable // ignore: cast_nullable_to_non_nullable
               as bool,
-      emailController: null == emailController
-          ? _value.emailController
-          : emailController // ignore: cast_nullable_to_non_nullable
+      nameController: null == nameController
+          ? _value.nameController
+          : nameController // ignore: cast_nullable_to_non_nullable
               as TextEditingController,
       passwordController: null == passwordController
           ? _value.passwordController
@@ -83,7 +83,7 @@ abstract class _$$LoginScreenStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {bool visiable,
-      TextEditingController emailController,
+      TextEditingController nameController,
       TextEditingController passwordController});
 }
 
@@ -99,7 +99,7 @@ class __$$LoginScreenStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? visiable = null,
-    Object? emailController = null,
+    Object? nameController = null,
     Object? passwordController = null,
   }) {
     return _then(_$LoginScreenStateImpl(
@@ -107,9 +107,9 @@ class __$$LoginScreenStateImplCopyWithImpl<$Res>
           ? _value.visiable
           : visiable // ignore: cast_nullable_to_non_nullable
               as bool,
-      emailController: null == emailController
-          ? _value.emailController
-          : emailController // ignore: cast_nullable_to_non_nullable
+      nameController: null == nameController
+          ? _value.nameController
+          : nameController // ignore: cast_nullable_to_non_nullable
               as TextEditingController,
       passwordController: null == passwordController
           ? _value.passwordController
@@ -124,19 +124,19 @@ class __$$LoginScreenStateImplCopyWithImpl<$Res>
 class _$LoginScreenStateImpl implements _LoginScreenState {
   const _$LoginScreenStateImpl(
       {required this.visiable,
-      required this.emailController,
+      required this.nameController,
       required this.passwordController});
 
   @override
   final bool visiable;
   @override
-  final TextEditingController emailController;
+  final TextEditingController nameController;
   @override
   final TextEditingController passwordController;
 
   @override
   String toString() {
-    return 'LoginScreenState(visiable: $visiable, emailController: $emailController, passwordController: $passwordController)';
+    return 'LoginScreenState(visiable: $visiable, nameController: $nameController, passwordController: $passwordController)';
   }
 
   @override
@@ -146,15 +146,15 @@ class _$LoginScreenStateImpl implements _LoginScreenState {
             other is _$LoginScreenStateImpl &&
             (identical(other.visiable, visiable) ||
                 other.visiable == visiable) &&
-            (identical(other.emailController, emailController) ||
-                other.emailController == emailController) &&
+            (identical(other.nameController, nameController) ||
+                other.nameController == nameController) &&
             (identical(other.passwordController, passwordController) ||
                 other.passwordController == passwordController));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, visiable, emailController, passwordController);
+      Object.hash(runtimeType, visiable, nameController, passwordController);
 
   @JsonKey(ignore: true)
   @override
@@ -167,14 +167,14 @@ class _$LoginScreenStateImpl implements _LoginScreenState {
 abstract class _LoginScreenState implements LoginScreenState {
   const factory _LoginScreenState(
           {required final bool visiable,
-          required final TextEditingController emailController,
+          required final TextEditingController nameController,
           required final TextEditingController passwordController}) =
       _$LoginScreenStateImpl;
 
   @override
   bool get visiable;
   @override
-  TextEditingController get emailController;
+  TextEditingController get nameController;
   @override
   TextEditingController get passwordController;
   @override

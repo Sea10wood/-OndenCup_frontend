@@ -7,6 +7,7 @@ part 'signup_screen_state.freezed.dart';
 class SignupScreenState with _$SignupScreenState {
   const factory SignupScreenState({
     required bool visiable,
+    required TextEditingController usernameController,
     required TextEditingController emailController,
     required TextEditingController passwordController,
   }) = _SignupScreenState;

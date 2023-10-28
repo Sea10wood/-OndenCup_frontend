@@ -17,6 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SignupScreenState {
   bool get visiable => throw _privateConstructorUsedError;
+  TextEditingController get usernameController =>
+      throw _privateConstructorUsedError;
   TextEditingController get emailController =>
       throw _privateConstructorUsedError;
   TextEditingController get passwordController =>
@@ -35,6 +37,7 @@ abstract class $SignupScreenStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool visiable,
+      TextEditingController usernameController,
       TextEditingController emailController,
       TextEditingController passwordController});
 }
@@ -53,6 +56,7 @@ class _$SignupScreenStateCopyWithImpl<$Res, $Val extends SignupScreenState>
   @override
   $Res call({
     Object? visiable = null,
+    Object? usernameController = null,
     Object? emailController = null,
     Object? passwordController = null,
   }) {
@@ -61,6 +65,10 @@ class _$SignupScreenStateCopyWithImpl<$Res, $Val extends SignupScreenState>
           ? _value.visiable
           : visiable // ignore: cast_nullable_to_non_nullable
               as bool,
+      usernameController: null == usernameController
+          ? _value.usernameController
+          : usernameController // ignore: cast_nullable_to_non_nullable
+              as TextEditingController,
       emailController: null == emailController
           ? _value.emailController
           : emailController // ignore: cast_nullable_to_non_nullable
@@ -83,6 +91,7 @@ abstract class _$$SignupScreenStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {bool visiable,
+      TextEditingController usernameController,
       TextEditingController emailController,
       TextEditingController passwordController});
 }
@@ -99,6 +108,7 @@ class __$$SignupScreenStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? visiable = null,
+    Object? usernameController = null,
     Object? emailController = null,
     Object? passwordController = null,
   }) {
@@ -107,6 +117,10 @@ class __$$SignupScreenStateImplCopyWithImpl<$Res>
           ? _value.visiable
           : visiable // ignore: cast_nullable_to_non_nullable
               as bool,
+      usernameController: null == usernameController
+          ? _value.usernameController
+          : usernameController // ignore: cast_nullable_to_non_nullable
+              as TextEditingController,
       emailController: null == emailController
           ? _value.emailController
           : emailController // ignore: cast_nullable_to_non_nullable
@@ -124,11 +138,14 @@ class __$$SignupScreenStateImplCopyWithImpl<$Res>
 class _$SignupScreenStateImpl implements _SignupScreenState {
   const _$SignupScreenStateImpl(
       {required this.visiable,
+      required this.usernameController,
       required this.emailController,
       required this.passwordController});
 
   @override
   final bool visiable;
+  @override
+  final TextEditingController usernameController;
   @override
   final TextEditingController emailController;
   @override
@@ -136,7 +153,7 @@ class _$SignupScreenStateImpl implements _SignupScreenState {
 
   @override
   String toString() {
-    return 'SignupScreenState(visiable: $visiable, emailController: $emailController, passwordController: $passwordController)';
+    return 'SignupScreenState(visiable: $visiable, usernameController: $usernameController, emailController: $emailController, passwordController: $passwordController)';
   }
 
   @override
@@ -146,6 +163,8 @@ class _$SignupScreenStateImpl implements _SignupScreenState {
             other is _$SignupScreenStateImpl &&
             (identical(other.visiable, visiable) ||
                 other.visiable == visiable) &&
+            (identical(other.usernameController, usernameController) ||
+                other.usernameController == usernameController) &&
             (identical(other.emailController, emailController) ||
                 other.emailController == emailController) &&
             (identical(other.passwordController, passwordController) ||
@@ -153,8 +172,8 @@ class _$SignupScreenStateImpl implements _SignupScreenState {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, visiable, emailController, passwordController);
+  int get hashCode => Object.hash(runtimeType, visiable, usernameController,
+      emailController, passwordController);
 
   @JsonKey(ignore: true)
   @override
@@ -167,12 +186,15 @@ class _$SignupScreenStateImpl implements _SignupScreenState {
 abstract class _SignupScreenState implements SignupScreenState {
   const factory _SignupScreenState(
           {required final bool visiable,
+          required final TextEditingController usernameController,
           required final TextEditingController emailController,
           required final TextEditingController passwordController}) =
       _$SignupScreenStateImpl;
 
   @override
   bool get visiable;
+  @override
+  TextEditingController get usernameController;
   @override
   TextEditingController get emailController;
   @override

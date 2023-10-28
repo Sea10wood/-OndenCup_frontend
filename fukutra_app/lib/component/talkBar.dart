@@ -12,7 +12,7 @@ class Bubble extends StatelessWidget {
     return Container(
       height: 50,
       padding: const EdgeInsets.only(left: 32, top: 8, right: 32, bottom: 8),
-      decoration: ShapeDecoration(
+      decoration: const ShapeDecoration(
         color: Colors.white,
         shadows: [
           BoxShadow(
