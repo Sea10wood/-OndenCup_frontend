@@ -57,9 +57,9 @@ class MyApp extends StatelessWidget {
         routerConfig: _router,
         debugShowCheckedModeBanner: false, //debugバナーを消す
         builder: Authenticator.builder(),
-        theme: ThemeData.dark().copyWith(
-          scaffoldBackgroundColor: const Color(0xFFffffff),
-        ),
+        // theme: ThemeData.dark().copyWith(
+        //   scaffoldBackgroundColor: const Color(0xFFffffff),
+        // ),
       ),
     );
   }
