@@ -7,6 +7,8 @@ class MoveSet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isWideScreen = screenWidth >= 600;
     return Scaffold(
       body: ListView(
         children: [
@@ -34,7 +36,7 @@ class MoveSet extends StatelessWidget {
               ),
             ),
           ),
-          CheckboxTransportation(),
+          CheckboxTransportationSet(),
           RichText(
             text: const TextSpan(
               text: '予算目安',
@@ -47,7 +49,17 @@ class MoveSet extends StatelessWidget {
               ),
             ),
           ),
-          CheckboxBudget(),
+          Padding(
+            padding: EdgeInsets.only(
+              left: isWideScreen ? 120 : 16,
+              right: isWideScreen ? 120 : 16,
+              top: 40,
+              bottom: 0,
+            ),
+            child: Container(
+              child: CheckboxBudgetSet(),
+            ),
+          ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               primary: Colors.blue,
@@ -139,77 +151,69 @@ class Talk extends StatelessWidget {
   }
 }
 
-class CheckboxTransportation extends StatefulWidget {
-  const CheckboxTransportation({Key? key}) : super(key: key);
+class CheckboxTransportationSet extends StatefulWidget {
+  const CheckboxTransportationSet({Key? key}) : super(key: key);
 
   @override
-  State<CheckboxTransportation> createState() => _CheckboxTransportation();
+  State<CheckboxTransportationSet> createState() => _CheckboxListState();
 }
 
-class _CheckboxTransportation extends State<CheckboxTransportation> {
-  final List<String> _valueList = ['車', '自転車', '徒歩', '電車', '地下鉄'];
-  final List<bool> _checkedList = List.generate(4, (index) => false);
+class _CheckboxListState extends State<CheckboxTransportationSet> {
+  final List<Map<String, dynamic>> _checkedMaps = [
+    {'value': '車', 'checked': false},
+    {'value': '自転車', 'checked': false},
+    {'value': '徒歩', 'checked': false},
+    {'value': '電車', 'checked': false},
+    {'value': '地下鉄', 'checked': false},
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: ListView.separated(
-          itemBuilder: (context, index) => CheckboxListTile(
-            title: Text(_valueList[index]),
-            subtitle: Text(_checkedList[index] ? "Set" : "OFF"),
-            value: _checkedList[index],
-            onChanged: (bool? checkedValue) {
-              setState(() {
-                _checkedList[index] = checkedValue!;
-              });
-            },
-          ),
-          separatorBuilder: (context, index) {
-            return const Divider(height: 0.5);
-          },
-          itemCount: _valueList.length,
-        ),
-      ),
+    return Column(
+      children: _checkedMaps
+          .map((e) => CheckboxListTile(
+                title: Text(e['value']),
+                subtitle: Text(e['checked'] ? "ON" : "OFF"),
+                value: e['checked'],
+                onChanged: (bool? checkedValue) {
+                  setState(() {
+                    e['checked'] = checkedValue;
+                  });
+                },
+              ))
+          .toList(),
     );
   }
 }
 
-class CheckboxBudget extends StatefulWidget {
-  const CheckboxBudget({Key? key}) : super(key: key);
+class CheckboxBudgetSet extends StatefulWidget {
+  const CheckboxBudgetSet({Key? key}) : super(key: key);
 
   @override
-  _CheckboxBudget createState() => _CheckboxBudget();
+  State<CheckboxBudgetSet> createState() => _CheckboxListBudgetState();
 }
 
-class _CheckboxBudget extends State<CheckboxBudget> {
-  final List<String> _valueList = [
-    '高め！',
-    'リーズナブル',
+class _CheckboxListBudgetState extends State<CheckboxBudgetSet> {
+  final List<Map<String, dynamic>> _checkedMaps = [
+    {'value': '高め', 'checked': false},
+    {'value': 'リーズナブル', 'checked': false},
   ];
-  final List<bool> _checkedList = List.generate(4, (index) => false);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: ListView.separated(
-          itemBuilder: (context, index) => CheckboxListTile(
-            title: Text(_valueList[index]),
-            subtitle: Text(_checkedList[index] ? "Set" : "OFF"),
-            value: _checkedList[index],
-            onChanged: (bool? checkedValue) {
-              setState(() {
-                _checkedList[index] = checkedValue!;
-              });
-            },
-          ),
-          separatorBuilder: (context, index) {
-            return const Divider(height: 0.5);
-          },
-          itemCount: _valueList.length,
-        ),
-      ),
+    return Column(
+      children: _checkedMaps
+          .map((e) => CheckboxListTile(
+                title: Text(e['value']),
+                subtitle: Text(e['checked'] ? "ON" : "OFF"),
+                value: e['checked'],
+                onChanged: (bool? checkedValue) {
+                  setState(() {
+                    e['checked'] = checkedValue;
+                  });
+                },
+              ))
+          .toList(),
     );
   }
 }
