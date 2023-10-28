@@ -60,14 +60,14 @@ class MoveSet extends StatelessWidget {
               child: CheckboxBudgetSet(),
             ),
           ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              primary: Colors.blue,
-              onPrimary: Colors.yellow,
+          Padding(
+            padding: const EdgeInsets.fromLTRB(120, 40, 120, 40),
+            child: Container(
+              color: Colors.blue[200],
+              height: 40,
+              child: ElevatedButton(onPressed: () {}, child: const Text('次へ')),
             ),
-            onPressed: null,
-            child: Text('次へ'),
-          ),
+          )
         ],
       ),
     );
@@ -99,7 +99,7 @@ class IconBar extends StatelessWidget {
           Icon(
             Icons.person,
             size: 48,
-            color: Colors.blue,
+            color: Colors.yellow,
           ),
           Transform.rotate(
             angle: 90 * 3.14159265 / 180,
@@ -112,7 +112,7 @@ class IconBar extends StatelessWidget {
           Icon(
             Icons.drive_eta,
             size: 48,
-            color: Colors.grey,
+            color: Colors.blue,
           ),
           Transform.rotate(
             angle: 90 * 3.14159265 / 180,
