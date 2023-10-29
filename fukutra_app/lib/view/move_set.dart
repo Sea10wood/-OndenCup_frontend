@@ -24,15 +24,23 @@ class MoveSet extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Talk(),
           ),
-          RichText(
-            text: const TextSpan(
-              text: '基本的な移動手段',
-              style: TextStyle(
-                color: Color(0xFF212121),
-                fontSize: 15,
-                fontFamily: 'Inter',
-                fontWeight: FontWeight.w700,
-                height: 1.0,
+          Padding(
+            padding: EdgeInsets.only(
+              left: 16,
+              right: 16,
+              top: 40,
+              bottom: 0,
+            ),
+            child: RichText(
+              text: const TextSpan(
+                text: '基本的な移動手段！',
+                style: TextStyle(
+                  color: Color(0xFF212121),
+                  fontSize: 15,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w700,
+                  height: 1.0,
+                ),
               ),
             ),
           ),
@@ -47,15 +55,23 @@ class MoveSet extends StatelessWidget {
               child: CheckboxTransportationSet(),
             ),
           ),
-          RichText(
-            text: const TextSpan(
-              text: '予算目安',
-              style: TextStyle(
-                color: Color(0xFF212121),
-                fontSize: 15,
-                fontFamily: 'Inter',
-                fontWeight: FontWeight.w700,
-                height: 1.0,
+          Padding(
+            padding: EdgeInsets.only(
+              left: 16,
+              right: 16,
+              top: 40,
+              bottom: 0,
+            ),
+            child: RichText(
+              text: const TextSpan(
+                text: '予算目安',
+                style: TextStyle(
+                  color: Color(0xFF212121),
+                  fontSize: 15,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w700,
+                  height: 1.0,
+                ),
               ),
             ),
           ),
