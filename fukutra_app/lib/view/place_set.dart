@@ -120,19 +120,6 @@ class IconBar extends StatelessWidget {
             size: 48,
             color: Colors.grey,
           ),
-          Transform.rotate(
-            angle: 90 * 3.14159265 / 180,
-            child: const Icon(
-              Icons.change_history,
-              size: 24,
-              color: Colors.grey,
-            ),
-          ),
-          const Icon(
-            Icons.calendar_today,
-            size: 48,
-            color: Colors.grey,
-          ),
         ],
       ),
     );
