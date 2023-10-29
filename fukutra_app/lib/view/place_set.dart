@@ -62,7 +62,7 @@ class PlaceSet extends StatelessWidget {
 class Logo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Positioned(
+    return const Positioned(
       left: 20,
       top: 80,
       child: Text(
@@ -79,6 +79,8 @@ class Logo extends StatelessWidget {
 }
 
 class IconBar extends StatelessWidget {
+  const IconBar({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -87,46 +89,46 @@ class IconBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
+          const Icon(
             Icons.search,
             size: 48,
             color: Colors.blue,
           ),
           Transform.rotate(
             angle: 90 * 3.14159265 / 180,
-            child: Icon(
+            child: const Icon(
               Icons.change_history,
               size: 24,
               color: Colors.grey,
             ),
           ),
-          Icon(
+          const Icon(
             Icons.person,
             size: 48,
             color: Colors.grey,
           ),
           Transform.rotate(
             angle: 90 * 3.14159265 / 180,
-            child: Icon(
+            child: const Icon(
               Icons.change_history,
               size: 24,
               color: Colors.grey,
             ),
           ),
-          Icon(
+          const Icon(
             Icons.drive_eta,
             size: 48,
             color: Colors.grey,
           ),
           Transform.rotate(
             angle: 90 * 3.14159265 / 180,
-            child: Icon(
+            child: const Icon(
               Icons.change_history,
               size: 24,
               color: Colors.grey,
             ),
           ),
-          Icon(
+          const Icon(
             Icons.calendar_today,
             size: 48,
             color: Colors.grey,

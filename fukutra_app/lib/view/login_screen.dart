@@ -77,7 +77,6 @@ class LoginScreenState extends ConsumerState<LoginScreen> {
                     onPressed: () {
                       notifier.signInUser(state.nameController.text,
                           state.passwordController.text, context);
-                      context.go('/home');
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,

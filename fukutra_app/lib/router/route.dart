@@ -5,6 +5,8 @@ import 'package:fukutra_app/view/confirmuser_screen.dart';
 import 'package:fukutra_app/view/forget_screen.dart';
 import 'package:fukutra_app/view/home_screen.dart';
 import 'package:fukutra_app/view/login_screen.dart';
+import 'package:fukutra_app/view/move_set.dart';
+import 'package:fukutra_app/view/people_set.dart';
 import 'package:fukutra_app/view/place_set.dart';
 import 'package:fukutra_app/view/resetpassword_screen.dart';
 import 'package:fukutra_app/view/signup_screen.dart';
@@ -39,8 +41,30 @@ final routerProvider = Provider<GoRouter>((ref) {
         },
       ),
       GoRoute(
-        path: '/PlaceSet',
+        path: '/placeset',
         pageBuilder: (context, state) => const MaterialPage(child: PlaceSet()),
+        redirect: (context, state) {
+          final result = isUserSignedIn().toString();
+          if (result == "false") {
+            return '/';
+          }
+          return null;
+        },
+      ),
+      GoRoute(
+        path: '/peopleset',
+        pageBuilder: (context, state) => const MaterialPage(child: PeopleSet()),
+        redirect: (context, state) {
+          final result = isUserSignedIn().toString();
+          if (result == "false") {
+            return '/';
+          }
+          return null;
+        },
+      ),
+      GoRoute(
+        path: '/moveset',
+        pageBuilder: (context, state) => const MaterialPage(child: MoveSet()),
         redirect: (context, state) {
           final result = isUserSignedIn().toString();
           if (result == "false") {
