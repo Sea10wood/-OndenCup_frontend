@@ -20,19 +20,26 @@ class _MapSetState extends State<MapSet> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Map!'),
-          backgroundColor: Colors.yellow[700],
-        ),
-        body: GoogleMap(
-          onMapCreated: _onMapCreated,
-          initialCameraPosition: CameraPosition(
-            target: _center,
-            zoom: 16.0,
-          ),
-        ),
-      ),
-    );
+        home: Scaffold(
+            appBar: AppBar(
+              title: const Text('Map!'),
+              backgroundColor: Colors.yellow[700],
+            ),
+            body: Center(
+              child: Padding(
+                padding: EdgeInsets.only(top: 30),
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.5,
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  child: GoogleMap(
+                    onMapCreated: _onMapCreated,
+                    initialCameraPosition: CameraPosition(
+                      target: _center,
+                      zoom: 16.0,
+                    ),
+                  ),
+                ),
+              ),
+            )));
   }
 }
