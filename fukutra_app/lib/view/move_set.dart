@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fukutra_app/view/place_set.dart';
 import '../../component/talkBar.dart';
 
-class MoveSet extends StatelessWidget {
-  const MoveSet({Key? key}) : super(key: key);
+class MoveSet extends ConsumerWidget {
+  final List list;
+  const MoveSet({Key? key, required this.list}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isWideScreen = screenWidth >= 600;
+    final a = list[0];
+    final b = list[1];
+    final c = list[2];
+    final d = list[3];
+    //final state = ref.watch(moveSetScreenProvider);
     return Scaffold(
       body: ListView(
         children: [
@@ -91,7 +98,12 @@ class MoveSet extends StatelessWidget {
             child: Container(
               color: Colors.blue[200],
               height: 40,
-              child: ElevatedButton(onPressed: () {}, child: const Text('次へ')),
+              child: ElevatedButton(
+                  onPressed: () {
+                    print("!!!!!!!!!!!!!!!!!");
+                    print("a:$a,b:$b,c:$c,d:$d,transport:リーズナブル,budget:車");
+                  },
+                  child: const Text('次へ')),
             ),
           )
         ],
@@ -164,67 +176,82 @@ class Talk extends StatelessWidget {
   }
 }
 
-class CheckboxTransportationSet extends StatefulWidget {
+class CheckboxTransportationSet extends ConsumerStatefulWidget {
   const CheckboxTransportationSet({Key? key}) : super(key: key);
 
   @override
-  State<CheckboxTransportationSet> createState() => _CheckboxListState();
+  CheckboxTransportationSetState createState() =>
+      CheckboxTransportationSetState();
 }
 
-class _CheckboxListState extends State<CheckboxTransportationSet> {
+class CheckboxTransportationSetState
+    extends ConsumerState<CheckboxTransportationSet> {
+  var transportationindex = -1;
   final List<Map<String, dynamic>> _checkedMaps = [
-    {'value': '車', 'checked': false},
-    {'value': '自転車', 'checked': false},
-    {'value': '徒歩', 'checked': false},
-    {'value': '電車', 'checked': false},
-    {'value': '地下鉄', 'checked': false},
+    {'index': 0, 'value': '車', 'checked': false},
+    {'index': 1, 'value': '自転車', 'checked': false},
+    {'index': 2, 'value': '徒歩', 'checked': false},
+    {'index': 3, 'value': '電車', 'checked': false},
+    {'index': 4, 'value': '地下鉄', 'checked': false},
   ];
 
   @override
   Widget build(BuildContext context) {
+    //var state = ref.watch(moveSetScreenProvider);
     return Column(
       children: _checkedMaps
-          .map((e) => CheckboxListTile(
-                title: Text(e['value']),
-                subtitle: Text(e['checked'] ? "ON" : "OFF"),
-                value: e['checked'],
-                onChanged: (bool? checkedValue) {
+          .map((e) => GestureDetector(
+                onTap: () {
+                  //state = state.copyWith(transport: e['value']);
                   setState(() {
-                    e['checked'] = checkedValue;
+                    transportationindex = e['index'];
                   });
                 },
+                child: CheckboxListTile(
+                  title: Text(e['value']),
+                  subtitle:
+                      Text(transportationindex == e['index'] ? "ON" : "OFF"),
+                  value: transportationindex == e['index'],
+                  onChanged: null,
+                ),
               ))
           .toList(),
     );
   }
 }
 
-class CheckboxBudgetSet extends StatefulWidget {
+class CheckboxBudgetSet extends ConsumerStatefulWidget {
   const CheckboxBudgetSet({Key? key}) : super(key: key);
 
   @override
-  State<CheckboxBudgetSet> createState() => _CheckboxListBudgetState();
+  CheckboxListBudgetState createState() => CheckboxListBudgetState();
 }
 
-class _CheckboxListBudgetState extends State<CheckboxBudgetSet> {
+class CheckboxListBudgetState extends ConsumerState<CheckboxBudgetSet> {
+  var budgetindex = -1;
   final List<Map<String, dynamic>> _checkedMaps = [
-    {'value': '高め', 'checked': false},
-    {'value': 'リーズナブル', 'checked': false},
+    {'index': 0, 'value': '高め', 'checked': false},
+    {'index': 1, 'value': 'リーズナブル', 'checked': false},
   ];
 
   @override
   Widget build(BuildContext context) {
+    //var state = ref.watch(moveSetScreenProvider);
     return Column(
       children: _checkedMaps
-          .map((e) => CheckboxListTile(
-                title: Text(e['value']),
-                subtitle: Text(e['checked'] ? "ON" : "OFF"),
-                value: e['checked'],
-                onChanged: (bool? checkedValue) {
+          .map((e) => GestureDetector(
+                onTap: () {
+                  //state = state.copyWith(budget: e['value']);
                   setState(() {
-                    e['checked'] = checkedValue;
+                    budgetindex = e['index'];
                   });
                 },
+                child: CheckboxListTile(
+                  title: Text(e['value']),
+                  subtitle: Text(budgetindex == e['index'] ? "ON" : "OFF"),
+                  value: budgetindex == e['index'],
+                  onChanged: null,
+                ),
               ))
           .toList(),
     );

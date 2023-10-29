@@ -54,18 +54,8 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: '/peopleset',
-        pageBuilder: (context, state) => const MaterialPage(child: PeopleSet()),
-        redirect: (context, state) {
-          final result = isUserSignedIn().toString();
-          if (result == "false") {
-            return '/';
-          }
-          return null;
-        },
-      ),
-      GoRoute(
-        path: '/map',
-        pageBuilder: (context, state) => const MaterialPage(child: MapSet()),
+        pageBuilder: (context, state) =>
+            MaterialPage(child: PeopleSet(list: state.extra as List)),
         redirect: (context, state) {
           final result = isUserSignedIn().toString();
           if (result == "false") {
@@ -76,7 +66,8 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: '/moveset',
-        pageBuilder: (context, state) => const MaterialPage(child: MoveSet()),
+        pageBuilder: (context, state) =>
+            MaterialPage(child: MoveSet(list: state.extra as List)),
         redirect: (context, state) {
           final result = isUserSignedIn().toString();
           if (result == "false") {
@@ -121,6 +112,17 @@ final routerProvider = Provider<GoRouter>((ref) {
       //         pageBuilder: (context, state) =>
       //             const MaterialPage(child: PeopleSet()),
       //       ),
+      GoRoute(
+        path: '/map',
+        pageBuilder: (context, state) => const MaterialPage(child: MapSet()),
+        redirect: (context, state) {
+          final result = isUserSignedIn().toString();
+          if (result == "false") {
+            return '/';
+          }
+          return null;
+        },
+      ),
       GoRoute(
         path: '/forget',
         pageBuilder: (context, state) =>

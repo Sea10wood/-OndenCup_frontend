@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../component/talkBar.dart';
 
 class PlaceSet extends StatelessWidget {
@@ -6,6 +7,9 @@ class PlaceSet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final stationcontroller = TextEditingController();
+    final detailcontroller = TextEditingController();
+
     return Scaffold(
       body: ListView(
         children: [
@@ -13,8 +17,8 @@ class PlaceSet extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Logo(),
           ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
+          const Padding(
+            padding: EdgeInsets.all(16.0),
             child: IconBar(),
           ),
           Padding(
@@ -25,6 +29,7 @@ class PlaceSet extends StatelessWidget {
             padding:
                 const EdgeInsets.only(left: 20, right: 20, top: 80, bottom: 10),
             child: TextFormField(
+              controller: stationcontroller,
               keyboardType: TextInputType.emailAddress,
               autofocus: false,
               decoration: const InputDecoration(
@@ -37,11 +42,12 @@ class PlaceSet extends StatelessWidget {
             padding:
                 const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 10),
             child: TextFormField(
+              controller: detailcontroller,
               keyboardType: TextInputType.emailAddress,
               autofocus: false,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: '集合する駅を入力',
+                labelText: '集合場所の詳細',
               ),
             ),
           ),
@@ -50,7 +56,12 @@ class PlaceSet extends StatelessWidget {
             child: Container(
               color: Colors.blue[200],
               height: 40,
-              child: ElevatedButton(onPressed: () {}, child: const Text('次へ')),
+              child: ElevatedButton(
+                  onPressed: () {
+                    context.go('/peopleset',
+                        extra: [stationcontroller.text, detailcontroller.text]);
+                  },
+                  child: const Text('次へ')),
             ),
           )
         ],
@@ -117,6 +128,19 @@ class IconBar extends StatelessWidget {
           ),
           const Icon(
             Icons.drive_eta,
+            size: 48,
+            color: Colors.grey,
+          ),
+          Transform.rotate(
+            angle: 90 * 3.14159265 / 180,
+            child: const Icon(
+              Icons.change_history,
+              size: 24,
+              color: Colors.grey,
+            ),
+          ),
+          const Icon(
+            Icons.calendar_today,
             size: 48,
             color: Colors.grey,
           ),

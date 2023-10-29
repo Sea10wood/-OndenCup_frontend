@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fukutra_app/view/place_set.dart';
+import 'package:fukutra_app/view_model/people_set/people_set_screen_notifier.dart';
+import 'package:go_router/go_router.dart';
 import '../../component/talkBar.dart';
 
-class PeopleSet extends StatelessWidget {
-  const PeopleSet({Key? key}) : super(key: key);
+class PeopleSet extends ConsumerWidget {
+  final List list;
+  const PeopleSet({Key? key, required this.list}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final a = list[0];
+    final b = list[1];
+    final state = ref.watch(peopleSetScreenProvider);
     final screenWidth = MediaQuery.of(context).size.width;
     final isWideScreen = screenWidth >= 600;
+
     return Scaffold(
       body: ListView(
         children: [
@@ -57,7 +65,7 @@ class PeopleSet extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(
+            padding: const EdgeInsets.only(
               left: 16,
               right: 16,
               top: 40,
@@ -84,7 +92,7 @@ class PeopleSet extends StatelessWidget {
               bottom: 0,
             ),
             child: Container(
-              child: CheckboxSituationSet(),
+              child: const CheckboxSituationSet(),
             ),
           ),
           Padding(
@@ -92,7 +100,11 @@ class PeopleSet extends StatelessWidget {
             child: Container(
               color: Colors.blue[200],
               height: 40,
-              child: ElevatedButton(onPressed: () {}, child: const Text('次へ')),
+              child: ElevatedButton(
+                  onPressed: () {
+                    context.go('/moveset', extra: [a, b, '1人', 'はしゃぐ！']);
+                  },
+                  child: const Text('次へ')),
             ),
           )
         ],
@@ -157,71 +169,84 @@ class Talk extends StatelessWidget {
   }
 }
 
-class CheckboxPeopleSet extends StatefulWidget {
+class CheckboxPeopleSet extends ConsumerStatefulWidget {
   const CheckboxPeopleSet({Key? key}) : super(key: key);
 
   @override
-  State<CheckboxPeopleSet> createState() => _CheckboxListTilesState();
+  CheckboxListTilesState createState() => CheckboxListTilesState();
 }
 
-class _CheckboxListTilesState extends State<CheckboxPeopleSet> {
+class CheckboxListTilesState extends ConsumerState<CheckboxPeopleSet> {
+  var peopleindex = -1;
+
   final List<Map<String, dynamic>> _checkedMaps = [
-    {'value': '1人', 'checked': false},
-    {'value': '２人', 'checked': false},
-    {'value': '３人', 'checked': false},
-    {'value': '4-8人', 'checked': false},
-    {'value': 'それ以上', 'checked': false},
+    {'index': 0, 'value': '1人', 'checked': 'false'},
+    {'index': 1, 'value': '２人', 'checked': 'false'},
+    {'index': 2, 'value': '３人', 'checked': 'false'},
+    {'index': 3, 'value': '4-8人', 'checked': 'false'},
+    {'index': 4, 'value': 'それ以上', 'checked': 'false'},
   ];
 
   @override
   Widget build(BuildContext context) {
+    var state = ref.watch(peopleSetScreenProvider);
     return Column(
       children: _checkedMaps
-          .map((e) => CheckboxListTile(
-                title: Text(e['value']),
-                subtitle: Text(e['checked'] ? "ON" : "OFF"),
-                value: e['checked'],
-                onChanged: (bool? checkedValue) {
+          .map((e) => GestureDetector(
+                onTap: () {
+                  state = state.copyWith(people: e['value']);
                   setState(() {
-                    e['checked'] = checkedValue;
+                    peopleindex = e['index'];
                   });
                 },
+                child: CheckboxListTile(
+                  title: Text(e['value']),
+                  subtitle: Text(peopleindex == e['index'] ? "ON" : "OFF"),
+                  value: peopleindex == e['index'],
+                  onChanged: null,
+                ),
               ))
           .toList(),
     );
   }
 }
 
-class CheckboxSituationSet extends StatefulWidget {
+class CheckboxSituationSet extends ConsumerStatefulWidget {
   const CheckboxSituationSet({Key? key}) : super(key: key);
 
   @override
-  State<CheckboxSituationSet> createState() => _CheckboxListSituationState();
+  CheckboxListSituationState createState() => CheckboxListSituationState();
 }
 
-class _CheckboxListSituationState extends State<CheckboxSituationSet> {
+class CheckboxListSituationState extends ConsumerState<CheckboxSituationSet> {
+  var situationindex = -1;
   final List<Map<String, dynamic>> _checkedMaps = [
-    {'value': 'はしゃぐ！', 'checked': false},
-    {'value': 'のんびり', 'checked': false},
-    {'value': 'グルメ！', 'checked': false},
-    {'value': '文化的に', 'checked': false},
-    {'value': '観光メイン', 'checked': false},
-    {'value': 'ふらふら', 'checked': false},
+    {'index': 0, 'value': 'はしゃぐ！', 'checked': 'false'},
+    {'index': 1, 'value': 'のんびり', 'checked': 'false'},
+    {'index': 2, 'value': 'グルメ！', 'checked': 'false'},
+    {'index': 3, 'value': '文化的に', 'checked': 'false'},
+    {'index': 4, 'value': '観光メイン', 'checked': 'false'},
+    {'index': 5, 'value': 'ふらふら', 'checked': 'false'},
   ];
 
   @override
   Widget build(BuildContext context) {
+    var state = ref.watch(peopleSetScreenProvider);
     return Column(
       children: _checkedMaps
-          .map((e) => CheckboxListTile(
-                title: Text(e['value']),
-                subtitle: Text(e['checked'] ? "ON" : "OFF"),
-                value: e['checked'],
-                onChanged: (bool? checkedValue) {
+          .map((e) => GestureDetector(
+                onTap: () {
+                  state = state.copyWith(situation: e['value']);
                   setState(() {
-                    e['checked'] = checkedValue;
+                    situationindex = e['index'];
                   });
                 },
+                child: CheckboxListTile(
+                  title: Text(e['value']),
+                  subtitle: Text(situationindex == e['index'] ? "ON" : "OFF"),
+                  value: situationindex == e['index'],
+                  onChanged: null,
+                ),
               ))
           .toList(),
     );
