@@ -3,8 +3,12 @@ import 'package:go_router/go_router.dart';
 
 class TitleScreen extends StatelessWidget {
   const TitleScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isWideScreen = screenWidth >= 600;
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
@@ -18,29 +22,30 @@ class TitleScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             RichText(
-              text: const TextSpan(
-                text: 'FukuTra',
-                style: TextStyle(
-                  color: Color(0xFF005AFF),
-                  fontSize: 64,
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w700,
-                  height: 1.0,
-                ),
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-              child: RichText(
-                text: const TextSpan(
-                    text: 'FukuokaTravel',
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: 'FukuTra',
                     style: TextStyle(
-                      color: Color.fromARGB(255, 255, 208, 0),
-                      fontSize: 24,
+                      color: Color(0xFF005AFF),
                       fontFamily: 'Inter',
                       fontWeight: FontWeight.w700,
                       height: 1.0,
-                    )),
+                      fontSize: isWideScreen ? 68.0 : 48.0,
+                    ),
+                  ),
+                  TextSpan(text: '\n'),
+                  TextSpan(
+                    text: 'FukuokaTravel',
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 255, 208, 0),
+                      fontSize: isWideScreen ? 32.0 : 24.0,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w700,
+                      height: 1.0,
+                    ),
+                  ),
+                ],
               ),
             ),
             Container(
@@ -49,121 +54,116 @@ class TitleScreen extends StatelessWidget {
                 children: [
                   RichText(
                     text: const TextSpan(
-                        text: '旅をもっと',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 105, 105, 105),
-                          fontSize: 30,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w700,
-                          height: 1.0,
-                        )),
+                      text: '旅をもっと',
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 105, 105, 105),
+                        fontSize: 16,
+                        fontFamily: 'Inter',
+                        fontWeight: FontWeight.w700,
+                        height: 1.0,
+                      ),
+                    ),
                   ),
                   RichText(
                     text: const TextSpan(
-                        text: '想像的',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 0, 26, 255),
-                          fontSize: 30,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w700,
-                          height: 1.0,
-                        )),
+                      text: '想像的',
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 0, 26, 255),
+                        fontSize: 16,
+                        fontFamily: 'Inter',
+                        fontWeight: FontWeight.w700,
+                        height: 1.0,
+                      ),
+                    ),
                   ),
                   RichText(
                     text: const TextSpan(
-                        text: 'に',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 105, 105, 105),
-                          fontSize: 30,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w700,
-                          height: 1.0,
-                        )),
+                      text: 'に',
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 105, 105, 105),
+                        fontSize: 16,
+                        fontFamily: 'Inter',
+                        fontWeight: FontWeight.w700,
+                        height: 1.0,
+                      ),
+                    ),
                   ),
                 ],
               ),
             ),
-            Container(
-              margin: const EdgeInsets.fromLTRB(10, 0, 0, 10),
-              child: Row(
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      context.go('/login');
-                    },
-                    style: TextButton.styleFrom(
-                      backgroundColor: Colors.grey,
-                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      textStyle: const TextStyle(fontSize: 20),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        context.go('/login');
+                      },
+                      style: TextButton.styleFrom(
+                        backgroundColor: Colors.yellow,
+                        padding: const EdgeInsets.fromLTRB(100, 0, 100, 0),
+                        textStyle: const TextStyle(fontSize: 20),
+                      ),
+                      child: const Text('ログイン',
+                          style: TextStyle(color: Colors.black)),
                     ),
-                    child: const Text('ログイン',
-                        style: TextStyle(color: Colors.black)),
-                  ),
-                  const SizedBox(width: 10),
-                  TextButton(
-                    onPressed: () {
-                      context.go('/signup');
-                    },
-                    style: TextButton.styleFrom(
-                      backgroundColor: Colors.grey,
-                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      textStyle: const TextStyle(fontSize: 20),
+                    const SizedBox(height: 10),
+                    TextButton(
+                      onPressed: () {
+                        context.go('/signup');
+                      },
+                      style: TextButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                        padding: const EdgeInsets.fromLTRB(100, 0, 100, 0),
+                        textStyle: const TextStyle(fontSize: 20),
+                      ),
+                      child: const Text('新規登録',
+                          style: TextStyle(color: Colors.white)),
                     ),
-                    child: const Text('新規登録',
-                        style: TextStyle(color: Colors.black)),
+                  ],
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.topRight,
+              child: Transform.scale(
+                scale: isWideScreen ? 1.5 : 1.0,
+                child: Container(
+                  padding: EdgeInsets.only(
+                    top: isWideScreen ? 100.0 : 20.0,
+                    right: isWideScreen ? 10.0 : 20.0,
+                    bottom: 40,
                   ),
-                ],
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-              child: RichText(
-                text: const TextSpan(
-                  text: '福岡に住んでるけど、紹介できるほど知らない人へ',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18,
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w400,
-                    height: 1.0,
+                  width: 240,
+                  height: 180,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/icons/mainLogo.gif'),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
             ),
-            RichText(
-              text: const TextSpan(
-                text: 'created by そーらーしーうるふ',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 105, 105, 105),
-                  fontSize: 18,
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w700,
-                  height: 1.0,
+            Align(
+              alignment: Alignment.topRight,
+              child: Container(
+                padding: EdgeInsets.only(top: 30, right: 10),
+                child: RichText(
+                  text: const TextSpan(
+                    text: 'created by そーらーしーうるふ',
+                    style: TextStyle(
+                      color: Color(0xFF757575),
+                      fontSize: 16,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w700,
+                      height: 1.0,
+                    ),
+                  ),
                 ),
               ),
             ),
-            Container(
-              width: 240,
-              height: 180,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/icons/mainLogo.gif'),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            RichText(
-              text: const TextSpan(
-                text: 'FukuokaTravel',
-                style: TextStyle(
-                  color: Color(0xFF757575),
-                  fontSize: 16,
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w700,
-                  height: 1.0,
-                ),
-              ),
-            )
           ],
         ),
       ),
