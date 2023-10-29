@@ -2,6 +2,7 @@ import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fukutra_app/view_model/confirmuser/confirmuser_screen_state.dart';
+import 'package:go_router/go_router.dart';
 
 //ここまでがモデル、ここから下がviewモデル
 final confirmUserScreenProvider =
@@ -29,15 +30,24 @@ class ConfirmUserScreenNotifier extends StateNotifier<ConfirmUserScreenState> {
       );
       // Check if further confirmations are needed or if
       // the sign up is complete.
-      await handleSignUpResult(result);
+      await handleSignUpResult(result, context);
     } on AuthException catch (e) {
       safePrint('Error confirming user: ${e.message}');
     }
   }
 
-  Future<void> handleSignUpResult(SignUpResult result) async {
-    final codeDeliveryDetails = result.nextStep.codeDeliveryDetails!;
-    handleCodeDelivery(codeDeliveryDetails);
+  Future<void> handleSignUpResult(
+      SignUpResult result, BuildContext context) async {
+    switch (result.nextStep.signUpStep) {
+      case AuthSignUpStep.confirmSignUp:
+        final codeDeliveryDetails = result.nextStep.codeDeliveryDetails!;
+        handleCodeDelivery(codeDeliveryDetails);
+        break;
+      case AuthSignUpStep.done:
+        safePrint('Sign up is complete');
+        context.go('/home');
+        break;
+    }
   }
 
   void handleCodeDelivery(AuthCodeDeliveryDetails codeDeliveryDetails) {

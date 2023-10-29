@@ -90,8 +90,8 @@ class SignupScreen extends ConsumerWidget {
                   ElevatedButton(
                     onPressed: () {
                       signupNotifier.signUpUser();
-                      context
-                          .go('${state.usernameController.text}}/confirmuser');
+                      context.go(
+                          '/signup/${state.usernameController.text}/confirmuser');
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,

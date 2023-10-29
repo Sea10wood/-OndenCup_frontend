@@ -1,5 +1,7 @@
+import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -16,6 +18,15 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
         centerTitle: true, // AndroidのAppBarの文字を中央寄せ.
         automaticallyImplyLeading: false, //戻るボタンを消す.
         title: const Text('Home Screen'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () {
+              Amplify.Auth.signOut();
+              context.go('/');
+            },
+          ),
+        ],
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -23,7 +34,7 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
               //縦に並べる
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                if (titlelist.length == 0)
+                if (titlelist.isEmpty)
                   const Text(
                     "No Plan",
                     style: TextStyle(

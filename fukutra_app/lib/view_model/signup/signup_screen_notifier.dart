@@ -51,8 +51,15 @@ class SignupScreenNotifier extends StateNotifier<SignupScreenState> {
   }
 
   Future<void> handleSignUpResult(SignUpResult result) async {
-    final codeDeliveryDetails = result.nextStep.codeDeliveryDetails!;
-    handleCodeDelivery(codeDeliveryDetails);
+    switch (result.nextStep.signUpStep) {
+      case AuthSignUpStep.confirmSignUp:
+        final codeDeliveryDetails = result.nextStep.codeDeliveryDetails!;
+        handleCodeDelivery(codeDeliveryDetails);
+        break;
+      case AuthSignUpStep.done:
+        safePrint('Sign up is complete');
+        break;
+    }
   }
 
   void handleCodeDelivery(AuthCodeDeliveryDetails codeDeliveryDetails) {

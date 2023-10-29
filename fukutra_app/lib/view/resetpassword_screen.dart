@@ -25,7 +25,7 @@ class ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back_ios),
             onPressed: () {
-              context.go('login');
+              context.go('/login');
             },
           ),
           title: const Text("ConfiemUser Screen"),

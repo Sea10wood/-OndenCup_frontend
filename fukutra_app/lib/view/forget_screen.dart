@@ -52,7 +52,8 @@ class ForgetScreen extends ConsumerWidget {
                   ElevatedButton(
                     onPressed: () {
                       notifier.resetPassword(state.nameController.text);
-                      context.go('${state.nameController.text}/resetpassword');
+                      context.go(
+                          '/forget/${state.nameController.text}/resetpassword');
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,

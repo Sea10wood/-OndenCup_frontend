@@ -1,20 +1,11 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fukutra_app/models/ModelProvider.dart';
-import 'package:fukutra_app/view/confirmuser_screen.dart';
-import 'package:fukutra_app/view/forget_screen.dart';
-import 'package:fukutra_app/view/home_screen.dart';
-import 'package:fukutra_app/view/login_screen.dart';
-import 'package:fukutra_app/view/resetpassword_screen.dart';
-import 'package:fukutra_app/view/signup_screen.dart';
-import 'package:fukutra_app/view/title_screen.dart';
-import 'package:go_router/go_router.dart';
+import 'package:fukutra_app/router/route.dart';
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'amplifyconfiguration.dart';
-import 'package:fukutra_app/view/place_set.dart';
 
 void main() async {
   // await dotenv.load(fileName: ".env"); //envファイルの読み込み
@@ -47,68 +38,20 @@ Future<void> _configureAmplify() async {
   }
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({Key? key}) : super(key: key);
-  static final router = GoRouter(
-    routes: [
-      GoRoute(
-          path: '/',
-          pageBuilder: (context, state) =>
-              const MaterialPage(child: TitleScreen()),
-          routes: [
-            GoRoute(
-              path: 'home',
-              pageBuilder: (context, state) =>
-                  const MaterialPage(child: HomeScreen()),
-            ),
-            GoRoute(
-              path: 'PlaceSet',
-              pageBuilder: (context, state) =>
-                  const MaterialPage(child: PlaceSet()),
-            ),
-            GoRoute(
-              path: 'login',
-              pageBuilder: (context, state) =>
-                  const MaterialPage(child: LoginScreen()),
-            ),
-            GoRoute(
-                path: 'signup',
-                pageBuilder: (context, state) => const MaterialPage(
-                      child: SignupScreen(),
-                    ),
-                routes: [
-                  GoRoute(
-                      path: ':name/confirmuser',
-                      pageBuilder: (context, state) => MaterialPage(
-                          child: ConfirmUserScreen(
-                              name: state.pathParameters['name']!.toString())))
-                ]),
-            //GoRoute(path: '/confirmuser', builder: (context, state) => const ConfirmUserScreen()),
-            GoRoute(
-                path: 'forget',
-                pageBuilder: (context, state) =>
-                    const MaterialPage(child: ForgetScreen()),
-                routes: [
-                  GoRoute(
-                    path: ':name/resetpassword',
-                    pageBuilder: (context, state) => MaterialPage(
-                      child: ResetPasswordScreen(
-                          name: state.pathParameters['name'].toString()),
-                    ),
-                  )
-                ]),
-          ]),
-    ],
-  );
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final goRouter = ref.watch(routerProvider);
     return MaterialApp.router(
-      routerConfig: router,
+      routerDelegate: goRouter.routerDelegate,
+      routeInformationParser: goRouter.routeInformationParser,
+      routeInformationProvider: goRouter.routeInformationProvider,
       debugShowCheckedModeBanner: false, //debugバナーを消す
-      theme: ThemeData.light().copyWith(
-          // scaffoldBackgroundColor: const Color(0xFFffffff),
-
-          ),
+      // theme: ThemeData.dark().copyWith(
+      //   scaffoldBackgroundColor: const Color(0xFFffffff),
+      // ),
+      //デフォルトの画面の色で見えないものができてしまうため一時的にコメント化
     );
   }
 }

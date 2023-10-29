@@ -25,7 +25,7 @@ class ConfirmUserScreenState extends ConsumerState<ConfirmUserScreen> {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back_ios),
             onPressed: () {
-              context.go('login');
+              context.go('/login');
             },
           ),
           title: const Text("ConfiemUser Screen"),
@@ -65,6 +65,7 @@ class ConfirmUserScreenState extends ConsumerState<ConfirmUserScreen> {
                         state.codeController.text,
                         context,
                       );
+                      context.go('/home');
                       //snackbar(message as String, context);
                     },
                     style: ElevatedButton.styleFrom(
