@@ -22,8 +22,8 @@ class _MapSetState extends State<MapSet> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Maps Sample App'),
-          backgroundColor: Colors.green[700],
+          title: const Text('Map!'),
+          backgroundColor: Colors.yellow[700],
         ),
         body: GoogleMap(
           onMapCreated: _onMapCreated,
