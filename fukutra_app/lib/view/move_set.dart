@@ -36,7 +36,17 @@ class MoveSet extends StatelessWidget {
               ),
             ),
           ),
-          CheckboxTransportationSet(),
+          Padding(
+            padding: EdgeInsets.only(
+              left: isWideScreen ? 120 : 16,
+              right: isWideScreen ? 120 : 16,
+              top: 20,
+              bottom: 0,
+            ),
+            child: Container(
+              child: CheckboxTransportationSet(),
+            ),
+          ),
           RichText(
             text: const TextSpan(
               text: '予算目安',
@@ -53,7 +63,7 @@ class MoveSet extends StatelessWidget {
             padding: EdgeInsets.only(
               left: isWideScreen ? 120 : 16,
               right: isWideScreen ? 120 : 16,
-              top: 40,
+              top: 20,
               bottom: 0,
             ),
             child: Container(
