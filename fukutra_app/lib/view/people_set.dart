@@ -77,8 +77,12 @@ class PeopleSet extends StatelessWidget {
             ),
           ),
           Padding(
-            padding:
-                const EdgeInsets.only(left: 0, right: 0, top: 40, bottom: 0),
+            padding: EdgeInsets.only(
+              left: isWideScreen ? 120 : 16,
+              right: isWideScreen ? 120 : 16,
+              top: 40,
+              bottom: 0,
+            ),
             child: Container(
               child: CheckboxSituationSet(),
             ),
