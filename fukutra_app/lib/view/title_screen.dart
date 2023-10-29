@@ -7,7 +7,9 @@ class TitleScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Title'),
+        elevation: 0.0,
+        title: const Text(''),
+        backgroundColor: Colors.white,
       ),
       body: Container(
         margin: const EdgeInsets.all(30.0),
